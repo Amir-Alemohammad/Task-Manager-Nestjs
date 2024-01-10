@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { TypeOrmConfig } from 'src/config/typeorm.config';
+import { TypeOrmConfig, TypeOrmDataSourceConfig } from 'src/config/typeorm.config';
 import { AuthModule } from '../auth/auth.module';
 import { CustomJWTModule } from '../jwt-modules/jwt.module';
 import { UserModule } from '../user/user.module';
@@ -16,7 +16,8 @@ import { TaskModule } from '../task/task.module';
       isGlobal: true,
       envFilePath: join(process.cwd(), `.env`),
     }),
-    TypeOrmModule.forRoot(TypeOrmConfig()),
+    // TypeOrmModule.forRoot(TypeOrmConfig()),
+    TypeOrmModule.forRoot(TypeOrmDataSourceConfig),
     CustomJWTModule,
     AuthModule,
     UserModule,
