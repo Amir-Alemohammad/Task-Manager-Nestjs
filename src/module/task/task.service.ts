@@ -19,6 +19,14 @@ export class TaskService {
         @InjectRepository(TaskEntity) private readonly taskRepository: Repository<TaskEntity>,
         @Inject(REQUEST) private readonly request: Request,
     ) { }
+    /**
+     * The function creates a new task with the provided data and saves it to the task repository.
+     * @param {CreateTaskDto} createTaskDto - An object containing the data needed to create a task. It
+     * has properties like `name` and `priority`.
+     * @param {MulterFile} file - The `file` parameter is of type `MulterFile`. It represents the
+     * uploaded file and contains information such as the file path, original name, size, and mimetype.
+     * @returns the saved task.
+     */
     async create(createTaskDto: CreateTaskDto, file: MulterFile) {
         const { name, priority } = createTaskDto
         const user = this.request.user;
