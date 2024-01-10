@@ -18,9 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "npm run build && npx typeorm -d dist/config/typeorm.config.js",
-    "migration:generate": "npm run typeorm -- migration:generate",
+    "typeorm": "npm run build && ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d ./src/config/typeorm.config.ts",
+    "migration:generate": "npm run typeorm -- migration:generate src/migrations/migration",
     "migration:run": "npm run typeorm -- migration:run",
+    "migration:create": "npm run typeorm -- migration:create src/migrations/migration",
     "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
@@ -69,7 +70,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },
