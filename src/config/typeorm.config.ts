@@ -5,7 +5,6 @@ import { DataSource, DataSourceOptions } from "typeorm";
 config()
 const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } = process.env;
 export function TypeOrmConfig(): TypeOrmModuleOptions {
-    const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } = process.env;
     console.log({ DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT: +DB_PORT, DB_USERNAME });
     return {
         type: "mysql",
@@ -19,17 +18,17 @@ export function TypeOrmConfig(): TypeOrmModuleOptions {
         entities: ['dist/**/**/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
     }
 }
-export const TypeOrmDataSourceConfig: DataSourceOptions = {
-    type: "mysql",
-    host: DB_HOST,
-    port: +DB_PORT,
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    // synchronize: false,
-    entities: ['dist/**/**/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
-    // migrationsRun: true,
-    migrations: ['dist/migrations/*{.ts,.js}'],
-}
-console.log({ DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT: +DB_PORT, DB_USERNAME });
-export const dataSource = new DataSource(TypeOrmDataSourceConfig);
+// export const TypeOrmDataSourceConfig: DataSourceOptions = {
+//     type: "mysql",
+//     host: DB_HOST,
+//     port: +DB_PORT,
+//     username: DB_USERNAME,
+//     password: DB_PASSWORD,
+//     database: DB_NAME,
+//     // synchronize: false,
+//     entities: ['dist/**/**/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
+//     // migrationsRun: true,
+//     migrations: ['dist/migrations/*{.ts,.js}'],
+// }
+// console.log({ DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT: +DB_PORT, DB_USERNAME });
+// export const dataSource = new DataSource(TypeOrmDataSourceConfig);

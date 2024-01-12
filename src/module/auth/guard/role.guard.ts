@@ -19,7 +19,7 @@ export class RoleGuard implements CanActivate {
         const user = req?.user;
         const userRole = user?.role;
         if (!requiredRoles || requiredRoles.length == 0) return true;
-        const accessResult = requiredRoles.some(role => role == userRole);
+        const accessResult = requiredRoles.some(role => userRole.includes(role));
         if (accessResult) return accessResult;
         throw new ForbiddenException(AuthMessages.Forbidden);
     }

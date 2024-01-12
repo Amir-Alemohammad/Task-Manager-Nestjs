@@ -12,6 +12,7 @@ import { Sortable } from "src/common/decorators/sort.decorator";
 import { PaginationDto } from "src/common/dtos/pagination.dto";
 import { SortDto } from "src/common/dtos/sortable.dto";
 import { Request } from "express";
+import { SetUserRoleDto } from "./dto/set-role.dto";
 
 @Controller('user')
 @ApiTags("User")
@@ -45,6 +46,15 @@ export class UserController {
         return {
             statusCode: HttpStatus.OK,
             message: UserMessage.Updated,
+        }
+    }
+    @Post('/set-role')
+    @ApiConsumes(SwaggerConsumes.URLENCODED, SwaggerConsumes.JSON)
+    async setRoleToUser(@Body() setRoleDto: SetUserRoleDto) {
+        await this.userService.setRoleToUser(+setRoleDto.userId, setRoleDto.role);
+        return {
+            statusCode: HttpStatus.OK,
+            message: UserMessage.RoleAddedSuccessfully
         }
     }
     @Delete('/:id')

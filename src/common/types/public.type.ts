@@ -1,7 +1,7 @@
 export type MulterFile = Express.Multer.File
 export type UserCookieType = {
     username: string;
-    role: string;
+    role: string[];
 }
 export type Tokens = {
     access_token?: string;

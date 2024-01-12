@@ -13,23 +13,25 @@ import { SortDto } from "src/common/dtos/sortable.dto";
 import { EntityName } from "src/common/enum/entity.enum";
 import { UserMessage } from "./enum/message.enum";
 import { Request } from "express";
+import { RolesService } from "../RBAC/service/roles.service";
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+        private readonly rolesService: RolesService,
     ) { }
     async create(createUserDto: RegisterDto) {
         createUserDto = removeEmptyFieldsObject(createUserDto);
         let { username, password } = createUserDto
         await this.checkExistUser(username);
-        let roleName = ROLES.USER;
         password = hashSync(password, AuthEnum.SALT_PASS);
         const user = this.userRepository.create({
             username,
             password,
-            role: roleName,
         });
+        if (!user.role) user.role = [];
+        user.role.push(ROLES.USER)
         return await this.userRepository.save(user)
     }
     async checkExistUser(username: string) {
@@ -51,7 +53,8 @@ export class UserService {
         searchTerm = searchTerm ? searchTerm.toLocaleLowerCase() : '';
         const [users, count] = await this.userRepository.createQueryBuilder(EntityName.USER)
             .leftJoin('user.tasks', 'tasks')
-            .addSelect(['tasks.id', 'tasks.image', 'tasks.name', 'tasks.priority', 'tasks.created_at'])
+            .leftJoin('user.roles', 'roles')
+            .addSelect(['tasks.id', 'roles.id', 'roles.name', 'roles.description', 'tasks.image', 'tasks.name', 'tasks.priority', 'tasks.created_at'])
             .where([
                 { username: Like(`%${searchTerm}%`) }
             ])
@@ -82,5 +85,15 @@ export class UserService {
         const ownUserId = request.user.id;
         if (user.id === ownUserId) throw new BadRequestException(UserMessage.ConflictDelete)
         return await this.userRepository.remove(user);
+    }
+    async setRoleToUser(userId: number, roleName: string) {
+        const user = await this.findUserById(userId)
+        const roles = await this.rolesService.checkExistByName(roleName);
+        for (const role of roles) {
+            user.role.push(role.name);
+            if (!user.roles) user.roles = [];
+            user.roles.push(role)
+        }
+        await this.userRepository.save(user)
     }
 }

@@ -4,5 +4,6 @@ export enum UserMessage {
     NotFound = 'کاربری با این مشخصات پیدا نشد',
     Deleted = 'کاربر با موفقیت حذف شد',
     ConflictPassword = 'کلمه عبور وارد شده با کلمه عبور ثبت شده مطابقت ندارد',
-    ConflictDelete = 'شما نمیتوانید حساب خود را حذف کنید'
+    ConflictDelete = 'شما نمیتوانید حساب خود را حذف کنید',
+    RoleAddedSuccessfully = 'نقش با موفقیت اضافه شد',
 }

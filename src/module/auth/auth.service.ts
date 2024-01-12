@@ -34,8 +34,9 @@ export class AuthService {
         const user = this.userRepository.create({
             username,
             password,
-            role: roleName,
         });
+        if (!user.role) user.role = [];
+        user.role.push(roleName)
         return await this.userRepository.save(user)
     }
     async login(loginDto: LoginDto) {

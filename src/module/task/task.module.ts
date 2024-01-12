@@ -6,12 +6,15 @@ import { TaskEntity } from "./entities/task.entity";
 import { TaskController } from "./task.controller";
 import { UserEntity } from "../user/entities/user.entity";
 import { UserService } from "../user/user.service";
+import { RolesEntity } from "../RBAC/entities/roles.entity";
+import { PermissionEntity } from "../RBAC/entities/permission.entity";
+import { RolesService } from "../RBAC/service/roles.service";
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([TaskEntity, UserEntity])
+        TypeOrmModule.forFeature([TaskEntity, UserEntity, RolesEntity, PermissionEntity])
     ],
     controllers: [TaskController],
-    providers: [TaskService, AuthService, UserService]
+    providers: [TaskService, AuthService, UserService, RolesService]
 })
 export class TaskModule { }
