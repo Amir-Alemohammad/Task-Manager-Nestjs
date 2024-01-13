@@ -7,7 +7,7 @@ import { AuthMessages } from "src/module/auth/enum/auth.message";
 import { CookieKeys } from "../enum/cookie.enum";
 type TokenType = { access_token: string, refresh_token: string }
 type LoginResponse = TokenType & {
-    role: string;
+    role: string[];
 }
 export async function setAuthCookies(req: Request, res: Response, user: UserEntity, response: LoginResponse) {
     const { access_token, refresh_token, role } = response;

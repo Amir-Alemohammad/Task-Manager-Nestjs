@@ -9,6 +9,7 @@ import { AuthModule } from '../auth/auth.module';
 import { CustomJWTModule } from '../jwt-modules/jwt.module';
 import { UserModule } from '../user/user.module';
 import { TaskModule } from '../task/task.module';
+import { RbacModule } from '../RBAC/rbac.module';
 
 @Module({
   imports: [
@@ -16,11 +17,13 @@ import { TaskModule } from '../task/task.module';
       isGlobal: true,
       envFilePath: join(process.cwd(), `.env`),
     }),
+    // TypeOrmModule.forRoot(TypeOrmDataSourceConfig),
     TypeOrmModule.forRoot(TypeOrmConfig()),
     CustomJWTModule,
     AuthModule,
     UserModule,
     TaskModule,
+    RbacModule,
   ],
   controllers: [AppController],
   providers: [AppService],

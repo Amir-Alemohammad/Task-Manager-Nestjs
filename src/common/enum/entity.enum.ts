@@ -1,4 +1,6 @@
 export enum EntityName {
     USER = 'user',
-    Task = 'task'
+    Task = 'task',
+    Roles = 'roles',
+    Permission = 'permission',
 }
