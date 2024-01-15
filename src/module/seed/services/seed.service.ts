@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Promise as Bluebird } from 'bluebird';
 import { DataSource } from "typeorm";
-import { ISeeder } from './interface/seeder.interface';
-import { UsersSeeder } from './users.seeder';
+import { ISeeder } from '../interface/seeder.interface';
+import { UsersSeeder } from '../data/users.seeder';
 
 @Injectable()
 export class SeedService {
@@ -17,7 +17,7 @@ export class SeedService {
         ];
     }
     async seed() {
-        await this.connection.synchronize(true);
+        await this.connection.synchronize(false);
 
         await Bluebird.each(this.seeders, async (seeder: ISeeder) => {
             this.logger.log(`Seeding ${seeder.constructor.name}`);

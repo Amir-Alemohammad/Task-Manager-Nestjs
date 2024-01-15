@@ -23,7 +23,9 @@
     "migration:run": "npm run typeorm -- migration:run",
     "migration:create": "npm run typeorm -- migration:create ./src/migrations/migration",
     "migration:revert": "npm run typeorm -- migration:revert",
-    "seed": "nest start --entryFile seed"
+    "db:reset": "npm run typeorm schema:drop && npm run migration:run",
+    "seed": "nest start --entryFile seed",
+    "seed:test": "nest start --entryFile seed-test"
   },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",
