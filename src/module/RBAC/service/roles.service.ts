@@ -9,6 +9,7 @@ import { PaginationDto } from "src/common/dtos/pagination.dto";
 import { SortDto } from "src/common/dtos/sortable.dto";
 import { paginationGenerator, paginationSolver } from "src/common/utils/function.util";
 import { PermissionMessage, RolesMessage } from "../enum/message.enum";
+import { TRoles } from "src/common/types/public.type";
 
 @Injectable()
 export class RolesService {
@@ -25,7 +26,7 @@ export class RolesService {
             description,
             permissions,
         })
-        await this.rolesRepository.save(role);
+        return await this.rolesRepository.save(role);
     }
     async findAll(paginationDto: PaginationDto, sortDto: SortDto, searchTerm: string) {
         const { limit, skip, page } = paginationSolver(+paginationDto.page, +paginationDto.limit)
@@ -95,5 +96,13 @@ export class RolesService {
             }
         }
         return await this.rolesRepository.delete(id)
+    }
+    async findRoleByName(name: string) {
+        const role = await this.rolesRepository.findOneBy({ name });
+        return role;
+    }
+    async assignRole(role: TRoles, data: TRoles) {
+        Object.assign(role, data)
+        await this.rolesRepository.save(role);
     }
 }

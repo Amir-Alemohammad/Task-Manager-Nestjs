@@ -9,6 +9,7 @@ import { PaginationDto } from "src/common/dtos/pagination.dto";
 import { SortDto } from "src/common/dtos/sortable.dto";
 import { paginationGenerator, paginationSolver } from "src/common/utils/function.util";
 import { RolesService } from "./roles.service";
+import { TPermission } from "src/common/types/public.type";
 
 @Injectable()
 export class PermissionService {
@@ -68,5 +69,23 @@ export class PermissionService {
         }
         await this.permissionRepository.delete(id)
     }
-
+    async findBySlug(slug: string) {
+        const permission = this.permissionRepository.findOne({
+            where: { slug }
+        });
+        return permission;
+    }
+    async findPermissions(id: number) {
+        const permissions = await this.permissionRepository.findBy({ id });
+        return permissions;
+    }
+    async findPermissionsBySlug(slug: string) {
+        const permissions = await this.permissionRepository.findBy({ slug });
+        return permissions;
+    }
+    async assignPermission(permission: TPermission, data: TPermission) {
+        data.slug = slugify(data.slug)
+        Object.assign(permission, data);
+        await this.permissionRepository.save(permission);
+    }
 }
