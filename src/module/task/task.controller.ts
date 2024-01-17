@@ -15,6 +15,8 @@ import { PaginationDto } from "src/common/dtos/pagination.dto";
 import { SortDto } from "src/common/dtos/sortable.dto";
 import { UpdateTaskDto } from "./dto/update.dto";
 import { TaskMessage } from "./enums/message.enum";
+import { checkPermissions } from "src/common/decorators/permission.decorator";
+import { Permissions } from "src/common/enum/roles.enum";
 
 @Controller('task')
 @ApiTags('Task')
@@ -33,6 +35,7 @@ export class TaskController {
             message: TaskMessage.Created,
         }
     }
+    @checkPermissions(Permissions.Manager)
     @Get('/list')
     @ApiQuery({ name: "search", type: "string", required: false, allowEmptyValue: true, })
     @Pagination()
