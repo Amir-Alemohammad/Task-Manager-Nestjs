@@ -96,4 +96,14 @@ export class UserService {
         }
         await this.userRepository.save(user)
     }
+    async getUserByUsername(username: string) {
+        const user = await this.userRepository.createQueryBuilder(EntityName.USER)
+            .leftJoinAndSelect('user.roles', 'roles')
+            .leftJoinAndSelect('roles.permissions', 'permissions')
+            .where([
+                { username },
+            ])
+            .getOne()
+        return user;
+    }
 }
