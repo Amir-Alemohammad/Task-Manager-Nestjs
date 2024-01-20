@@ -3,7 +3,7 @@ import { ApiConsumes, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { UserService } from "./user.service";
 import { AuthDecorator } from "src/common/decorators/auth.decorator";
 import { Roles } from "src/common/decorators/role.decorator";
-import { ROLES } from "src/common/enum/roles.enum";
+import { Permissions, ROLES } from "src/common/enum/roles.enum";
 import { RegisterDto } from "../auth/dto/register.dto";
 import { UserMessage } from "./enum/message.enum";
 import { SwaggerConsumes } from "src/common/enum/swagger.enum";
@@ -13,11 +13,12 @@ import { PaginationDto } from "src/common/dtos/pagination.dto";
 import { SortDto } from "src/common/dtos/sortable.dto";
 import { Request } from "express";
 import { SetUserRoleDto } from "./dto/set-role.dto";
+import { checkPermissions } from "src/common/decorators/permission.decorator";
 
 @Controller('user')
 @ApiTags("User")
 @AuthDecorator()
-@Roles(ROLES.ADMIN)
+@checkPermissions(Permissions.User)
 export class UserController {
     constructor(
         private readonly userService: UserService,

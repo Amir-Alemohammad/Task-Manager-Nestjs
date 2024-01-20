@@ -3,6 +3,8 @@ export enum ROLES {
     ADMIN = "admin",
 }
 export enum Permissions {
-    Manager = 'manage-users',
-    Admin = 'admin permission'
+    Manager = 'manage_users',
+    Admin = 'admin_permission',
+    User = 'user_permission',
+    Reporting = 'reporting_permission',
 }

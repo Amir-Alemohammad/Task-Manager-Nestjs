@@ -28,16 +28,14 @@ export class PermissionGuard implements CanActivate {
                 { id: req.user.id }
             ])
             .getOne()
-        const userRoles = user.roles.find(item => item);
-        if (userRoles) {
-            for (const userPermission of userRoles.permissions) {
-                console.log(userPermission.slug)
-                console.log(requiredPermission)
+        user.roles.forEach(role => {
+            for (const userPermission of role.permissions) {
                 const accessResult = requiredPermission.some(permission => userPermission.slug.includes(permission));
+                if (!accessResult) throw new ForbiddenException(AuthMessages.Forbidden);
                 if (!requiredPermission || requiredPermission.length == 0) return true;
-                if (accessResult) return accessResult;
-                throw new ForbiddenException(AuthMessages.Forbidden);
+                return accessResult;
             }
-        } else { throw new ForbiddenException(AuthMessages.Forbidden); }
+        });
+        return true;
     }
 }
