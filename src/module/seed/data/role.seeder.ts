@@ -39,8 +39,8 @@ export class RoleSeeder {
                 user.roles.push(newRole);
             } else {
                 await this.rolesService.assignRole(role, dataOfRoles);
-                user.role = [role.name];
-                user.roles = [role];
+                user.role.push(role.name)
+                user.roles.push(role);
             }
         }
     }
