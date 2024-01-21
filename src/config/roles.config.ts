@@ -1,6 +1,6 @@
 export const rolesConfig = () => [
     {
-        name: 'user',
+        name: 'admin',
         description: 'admin role',
     }
 ]

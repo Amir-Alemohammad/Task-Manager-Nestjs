@@ -1,13 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { hashSync } from "bcrypt";
-import slugify from "slugify";
 import { AuthEnum } from "src/common/enum/auth.enum";
 import { TPermission, TRoles, TUser } from "src/common/types/public.type";
 import { userConfig } from "src/config/user.config";
-import { RolesEntity } from "src/module/RBAC/entities/roles.entity";
 import { PermissionService } from "src/module/RBAC/service/permission.service";
-import { RolesService } from "src/module/RBAC/service/roles.service";
 import { UserEntity } from "src/module/user/entities/user.entity";
 import { Repository } from "typeorm";
 import { RoleSeeder } from "./role.seeder";
@@ -24,7 +21,6 @@ export class PermissionSeeder {
         if (!user) {
             userData.password = hashSync(userData.password, AuthEnum.SALT_PASS);
             for (const dataOfPermission of permissionData) {
-                dataOfPermission.slug = slugify(dataOfPermission.slug)
                 console.log(dataOfPermission.slug)
                 const existPermission = await this.permissionService.findBySlug(dataOfPermission.slug)
                 console.log(existPermission)
@@ -38,11 +34,10 @@ export class PermissionSeeder {
             }
         } else {
             for (const dataOfPermission of permissionData) {
-                dataOfPermission.slug = slugify(dataOfPermission.slug);
                 const permission = await this.permissionService.findBySlug(dataOfPermission.slug);
                 if (!permission) {
-                    await this.permissionService.create(dataOfPermission);
-                    await this.roleSeeder.seedUser(user, roleData, permission.id);
+                    const newPermission = await this.permissionService.create(dataOfPermission);
+                    await this.roleSeeder.seedUser(user, roleData, newPermission.id);
                 } else {
                     await this.permissionService.assignPermission(permission, dataOfPermission);
                     await this.roleSeeder.seedUser(user, roleData, permission.id);
