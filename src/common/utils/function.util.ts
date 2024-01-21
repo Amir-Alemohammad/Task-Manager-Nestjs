@@ -4,6 +4,8 @@ import * as fs from 'fs';
 import * as qs from 'querystring';
 import { UserEntity } from "src/module/user/entities/user.entity";
 import { IUser } from "src/module/user/interface/user-request.interface";
+import { TUser } from "../types/public.type";
+import { Permissions } from "../enum/roles.enum";
 
 
 export function removeEmptyFieldsObject(obj: object): any {
@@ -56,4 +58,10 @@ export function getUserResponse(user: UserEntity): IUser {
 export function removeFileInPublic(fileAddress: string) {
     const filePath = path.join(process.cwd(), fileAddress)
     fs.unlinkSync(filePath)
+}
+export function hasPermission(user: TUser, requiredPermissions: Permissions[]) {
+    const userPermissions = user.roles.flatMap(role => role.permissions.map(permission => permission.slug));
+    return requiredPermissions.every(requiredPermission => {
+        return userPermissions.includes(requiredPermission);
+    })
 }

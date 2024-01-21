@@ -8,6 +8,7 @@ import { Repository } from "typeorm";
 import { EntityName } from "src/common/enum/entity.enum";
 import { PERMISSION_KEY } from "src/common/decorators/permission.decorator";
 import { Permissions } from "src/common/enum/roles.enum";
+import { hasPermission } from "src/common/utils/function.util";
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
@@ -16,10 +17,11 @@ export class PermissionGuard implements CanActivate {
         private reflector: Reflector,
     ) { }
     async canActivate(context: ExecutionContext) {
-        const requiredPermission = this.reflector.getAllAndOverride<Permissions[]>(PERMISSION_KEY, [
+        const requiredPermissions = this.reflector.getAllAndOverride<Permissions[]>(PERMISSION_KEY, [
             context.getHandler(),
             context.getClass()
         ]);
+        if (!requiredPermissions || requiredPermissions.length == 0) return true;
         const req: Request = context.switchToHttp().getRequest<Request>();
         const user = await this.userRepository.createQueryBuilder(EntityName.USER)
             .leftJoinAndSelect('user.roles', 'roles')
@@ -28,16 +30,8 @@ export class PermissionGuard implements CanActivate {
                 { id: req.user.id }
             ])
             .getOne()
-        let permission = [];
-        user.roles.forEach(role => {
-            for (const userPermission of role.permissions) {
-                const accessResult = requiredPermission.some(permission => userPermission.slug.includes(permission));
-                permission.push(accessResult);
-                if (!requiredPermission || requiredPermission.length == 0) return true;
-                return accessResult
-            }
-        });
-        if (!permission.includes(true)) throw new ForbiddenException(AuthMessages.Forbidden)
-        return true;
+        const permission = hasPermission(user, requiredPermissions);
+        if (!permission) throw new ForbiddenException(AuthMessages.Forbidden)
+        return permission;
     }
 }
