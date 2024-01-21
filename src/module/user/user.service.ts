@@ -44,7 +44,14 @@ export class UserService {
         return user;
     }
     async findUserById(id: number) {
-        const user = await this.userRepository.findOneBy({ id })
+        console.log(id)
+        const user = await this.userRepository.createQueryBuilder(EntityName.USER)
+            .leftJoinAndSelect('user.roles', 'roles')
+            .leftJoinAndSelect('roles.permissions', 'permissions')
+            .where([
+                { id }
+            ])
+            .getOne()
         if (!user) throw new NotFoundException(AuthMessages.NotFoundAccount)
         return user;
     }
