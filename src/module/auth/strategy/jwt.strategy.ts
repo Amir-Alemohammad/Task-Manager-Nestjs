@@ -5,9 +5,9 @@ import { JwtPayloadDto } from '../dto/payload.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Request } from 'express';
-import { UserEntity } from 'src/module/user/entities/user.entity';
+import { UserEntity } from '../../../module/user/entities/user.entity';
 import { AuthMessages } from '../enum/auth.message';
-import { getAccessTokenFromRequest, getRefreshTokenFromRequest } from 'src/common/utils/function.util';
+import { getAccessTokenFromRequest, getRefreshTokenFromRequest } from '../../../common/utils/function.util';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     constructor(

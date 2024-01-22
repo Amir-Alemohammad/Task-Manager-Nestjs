@@ -2,8 +2,8 @@ import { Request } from "express";
 import * as path from "path";
 import * as fs from 'fs';
 import * as qs from 'querystring';
-import { UserEntity } from "src/module/user/entities/user.entity";
-import { IUser } from "src/module/user/interface/user-request.interface";
+import { UserEntity } from "../../module/user/entities/user.entity";
+import { IUser } from "../../module/user/interface/user-request.interface";
 import { TUser } from "../types/public.type";
 import { Permissions } from "../enum/roles.enum";
 

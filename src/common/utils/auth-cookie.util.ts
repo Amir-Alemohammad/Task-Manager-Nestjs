@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { GetTokenCookieOption, GetUserCookieData, GetUserCookieOption } from "src/config/set-cookie.config";
+import { GetTokenCookieOption, GetUserCookieData, GetUserCookieOption } from "../../config/set-cookie.config";
 import { RefreshTokenExpires, AccessTokenExpires } from "../constant/expires-data.constant";
 import { HttpStatus } from "@nestjs/common";
-import { UserEntity } from "src/module/user/entities/user.entity";
-import { AuthMessages } from "src/module/auth/enum/auth.message";
+import { UserEntity } from "../../module/user/entities/user.entity";
+import { AuthMessages } from "../../module/auth/enum/auth.message";
 import { CookieKeys } from "../enum/cookie.enum";
 type TokenType = { access_token: string, refresh_token: string }
 type LoginResponse = TokenType & {

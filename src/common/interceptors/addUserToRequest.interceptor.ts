@@ -3,12 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Request, Response } from "express";
 import { Observable } from "rxjs";
 import { Repository } from "typeorm";
-import { UserEntity } from "src/module/user/entities/user.entity";
-import { AuthService } from "src/module/auth/auth.service";
-import { JwtPayloadDto } from "src/module/auth/dto/payload.dto";
-import { IUser } from "src/module/user/interface/user-request.interface";
+import { UserEntity } from "../../module/user/entities/user.entity";
+import { AuthService } from "../../module/auth/auth.service";
+import { JwtPayloadDto } from "../../module/auth/dto/payload.dto";
+import { IUser } from "../../module/user/interface/user-request.interface";
 import { JwtError } from "../enum/error.enum";
-import { AuthMessages } from "src/module/auth/enum/auth.message";
+import { AuthMessages } from "../../module/auth/enum/auth.message";
 import { getUserResponse } from "../utils/function.util";
 import { justSetAuthCookies } from "../utils/auth-cookie.util";
 @Injectable()

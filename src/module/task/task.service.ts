@@ -3,14 +3,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { TaskEntity } from "./entities/task.entity";
 import { Like, Repository } from "typeorm";
 import { CreateTaskDto } from "./dto/create.dto";
-import { PaginationDto } from "src/common/dtos/pagination.dto";
-import { SortDto } from "src/common/dtos/sortable.dto";
+import { PaginationDto } from "../../common/dtos/pagination.dto";
+import { SortDto } from "../../common/dtos/sortable.dto";
 import { UpdateTaskDto } from "./dto/update.dto";
-import { MulterFile } from "src/common/types/public.type";
+import { MulterFile } from "../../common/types/public.type";
 import { Request } from "express";
 import { REQUEST } from "@nestjs/core";
-import { paginationGenerator, paginationSolver, removeFileInPublic } from "src/common/utils/function.util";
-import { EntityName } from "src/common/enum/entity.enum";
+import { paginationGenerator, paginationSolver, removeFileInPublic } from "../../common/utils/function.util";
+import { EntityName } from "../../common/enum/entity.enum";
 import { TaskMessage } from "./enums/message.enum";
 
 @Injectable({ scope: Scope.REQUEST })

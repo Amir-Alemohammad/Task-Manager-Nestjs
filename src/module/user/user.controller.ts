@@ -1,24 +1,23 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query, Req } from "@nestjs/common";
 import { ApiConsumes, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { UserService } from "./user.service";
-import { AuthDecorator } from "src/common/decorators/auth.decorator";
-import { Roles } from "src/common/decorators/role.decorator";
-import { Permissions, ROLES } from "src/common/enum/roles.enum";
+import { AuthDecorator } from "../../common/decorators/auth.decorator";
+import { Permissions } from "../../common/enum/roles.enum";
 import { RegisterDto } from "../auth/dto/register.dto";
 import { UserMessage } from "./enum/message.enum";
-import { SwaggerConsumes } from "src/common/enum/swagger.enum";
-import { Pagination } from "src/common/decorators/pagination.decorator";
-import { Sortable } from "src/common/decorators/sort.decorator";
-import { PaginationDto } from "src/common/dtos/pagination.dto";
-import { SortDto } from "src/common/dtos/sortable.dto";
+import { SwaggerConsumes } from "../../common/enum/swagger.enum";
+import { Pagination } from "../../common/decorators/pagination.decorator";
+import { Sortable } from "../../common/decorators/sort.decorator";
+import { PaginationDto } from "../../common/dtos/pagination.dto";
+import { SortDto } from "../../common/dtos/sortable.dto";
 import { Request } from "express";
 import { SetUserRoleDto } from "./dto/set-role.dto";
-import { checkPermissions } from "src/common/decorators/permission.decorator";
+import { checkPermissions } from "../../common/decorators/permission.decorator";
 
 @Controller('user')
 @ApiTags("User")
-@AuthDecorator()
-@checkPermissions(Permissions.User)
+// @AuthDecorator()
+// @checkPermissions(Permissions.User)
 export class UserController {
     constructor(
         private readonly userService: UserService,

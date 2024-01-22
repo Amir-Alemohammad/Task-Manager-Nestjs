@@ -1,7 +1,6 @@
-import { EntityName } from "src/common/enum/entity.enum";
-import { ROLES } from "src/common/enum/roles.enum";
-import { RolesEntity } from "src/module/RBAC/entities/roles.entity";
-import { TaskEntity } from "src/module/task/entities/task.entity";
+import { EntityName } from "../../../common/enum/entity.enum";
+import { RolesEntity } from "../../../module/RBAC/entities/roles.entity";
+import { TaskEntity } from "../../../module/task/entities/task.entity";
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity(EntityName.USER)

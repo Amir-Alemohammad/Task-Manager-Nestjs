@@ -1,5 +1,5 @@
-import { EntityName } from "src/common/enum/entity.enum";
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { EntityName } from "../../../common/enum/entity.enum";
+import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { RolesEntity } from "./roles.entity";
 
 @Entity(EntityName.Permission)

@@ -4,12 +4,11 @@ import { RolesEntity } from "../entities/roles.entity";
 import { Like, Repository } from "typeorm";
 import { PermissionEntity } from "../entities/permission.entity";
 import { CreateRolesDto, UpdateRoleDto } from "../dto/roles.dto";
-import { PermissionService } from "./permission.service";
-import { PaginationDto } from "src/common/dtos/pagination.dto";
-import { SortDto } from "src/common/dtos/sortable.dto";
-import { paginationGenerator, paginationSolver } from "src/common/utils/function.util";
+import { PaginationDto } from "../../../common/dtos/pagination.dto";
+import { SortDto } from "../../../common/dtos/sortable.dto";
+import { paginationGenerator, paginationSolver } from "../../../common/utils/function.util";
 import { PermissionMessage, RolesMessage } from "../enum/message.enum";
-import { TRoles } from "src/common/types/public.type";
+import { TRoles } from "../../../common/types/public.type";
 
 @Injectable()
 export class RolesService {

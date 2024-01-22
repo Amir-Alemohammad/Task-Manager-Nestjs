@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query } from "@nestjs/common";
 import { ApiConsumes, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { PermissionService } from "../service/permission.service";
-import { AuthDecorator } from "src/common/decorators/auth.decorator";
-import { Roles } from "src/common/decorators/role.decorator";
-import { ROLES } from "src/common/enum/roles.enum";
+import { AuthDecorator } from "../../../common/decorators/auth.decorator";
+import { Roles } from "../../../common/decorators/role.decorator";
+import { ROLES } from "../../../common/enum/roles.enum";
 import { CreatePermissionDto, UpdatePermissionDto } from "../dto/permission.dto";
-import { SwaggerConsumes } from "src/common/enum/swagger.enum";
+import { SwaggerConsumes } from "../../../common/enum/swagger.enum";
 import { PermissionMessage } from "../enum/message.enum";
-import { Sortable } from "src/common/decorators/sort.decorator";
-import { Pagination } from "src/common/decorators/pagination.decorator";
-import { PaginationDto } from "src/common/dtos/pagination.dto";
-import { SortDto } from "src/common/dtos/sortable.dto";
+import { Sortable } from "../../../common/decorators/sort.decorator";
+import { Pagination } from "../../../common/decorators/pagination.decorator";
+import { PaginationDto } from "../../../common/dtos/pagination.dto";
+import { SortDto } from "../../../common/dtos/sortable.dto";
 
 @Controller('permission')
 @ApiTags('RBAC')
