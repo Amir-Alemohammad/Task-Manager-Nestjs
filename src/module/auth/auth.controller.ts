@@ -4,8 +4,8 @@ import { AuthService } from "./auth.service";
 import { AuthMessages } from "./enum/auth.message";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
-import { SwaggerConsumes } from "src/common/enum/swagger.enum";
-import { setAuthCookies } from "src/common/utils/auth-cookie.util";
+import { SwaggerConsumes } from "../../common/enum/swagger.enum";
+import { setAuthCookies } from "../../common/utils/auth-cookie.util";
 import { Request, Response } from "express";
 
 @Controller('auth')

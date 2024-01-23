@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "../user/entities/user.entity";
 import { Repository } from "typeorm";
@@ -6,13 +6,13 @@ import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
 import { JwtService } from "@nestjs/jwt";
 import { JwtPayloadDto } from "./dto/payload.dto";
-import { AuthEnum } from "src/common/enum/auth.enum";
+import { AuthEnum } from "../../common/enum/auth.enum";
 import { parse } from 'querystring'
 import { Request } from "express";
 import { AuthMessages } from "./enum/auth.message";
-import { JwtError } from "src/common/enum/error.enum";
-import { removeEmptyFieldsObject } from "src/common/utils/function.util";
-import { ROLES } from "src/common/enum/roles.enum";
+import { JwtError } from "../../common/enum/error.enum";
+import { removeEmptyFieldsObject } from "../../common/utils/function.util";
+import { ROLES } from "../../common/enum/roles.enum";
 import { compareSync, hashSync } from 'bcrypt'
 import { UserService } from "../user/user.service";
 
