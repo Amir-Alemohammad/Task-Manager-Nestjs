@@ -1,5 +1,5 @@
-import { EntityName } from "src/common/enum/entity.enum";
-import { UserEntity } from "src/module/user/entities/user.entity";
+import { EntityName } from "../../../common/enum/entity.enum";
+import { UserEntity } from "../../../module/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Priority } from "../enums/priority.enum";
 

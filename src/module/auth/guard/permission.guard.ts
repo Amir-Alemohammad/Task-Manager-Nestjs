@@ -3,12 +3,12 @@ import { Reflector } from "@nestjs/core";
 import { Request } from "express";
 import { AuthMessages } from "../enum/auth.message";
 import { InjectRepository } from "@nestjs/typeorm";
-import { UserEntity } from "src/module/user/entities/user.entity";
+import { UserEntity } from "../../user/entities/user.entity";
 import { Repository } from "typeorm";
-import { EntityName } from "src/common/enum/entity.enum";
-import { PERMISSION_KEY } from "src/common/decorators/permission.decorator";
-import { Permissions } from "src/common/enum/roles.enum";
-import { hasPermission } from "src/common/utils/function.util";
+import { EntityName } from "../../../common/enum/entity.enum";
+import { PERMISSION_KEY } from "../../../common/decorators/permission.decorator";
+import { Permissions } from "../../../common/enum/roles.enum";
+import { hasPermission } from "../../../common/utils/function.util";
 
 @Injectable()
 export class PermissionGuard implements CanActivate {

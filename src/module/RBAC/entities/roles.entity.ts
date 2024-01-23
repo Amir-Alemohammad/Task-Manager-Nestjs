@@ -1,6 +1,6 @@
-import { EntityName } from "src/common/enum/entity.enum";
-import { UserEntity } from "src/module/user/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { EntityName } from "../../../common/enum/entity.enum";
+import { UserEntity } from "../../../module/user/entities/user.entity";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PermissionEntity } from "./permission.entity";
 
 @Entity(EntityName.Roles)

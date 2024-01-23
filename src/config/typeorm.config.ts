@@ -1,5 +1,9 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from "dotenv";
+import { PermissionEntity } from "src/module/RBAC/entities/permission.entity";
+import { RolesEntity } from "src/module/RBAC/entities/roles.entity";
+import { TaskEntity } from "src/module/task/entities/task.entity";
+import { UserEntity } from "src/module/user/entities/user.entity";
 import { DataSource, DataSourceOptions } from "typeorm";
 
 config()
@@ -26,7 +30,7 @@ export const TypeOrmDataSourceConfig: DataSourceOptions = {
     password: DB_PASSWORD,
     database: DB_NAME,
     // synchronize: false,
-    entities: ['dist/**/**/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
+    entities: [UserEntity, TaskEntity, PermissionEntity, RolesEntity],
     // migrationsRun: true,
     // migrations: ['src/migrations/*{.ts,.js}'],
 }

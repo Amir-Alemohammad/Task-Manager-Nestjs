@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { hashSync } from "bcrypt";
-import { AuthEnum } from "src/common/enum/auth.enum";
-import { TPermission, TRoles, TUser } from "src/common/types/public.type";
-import { userConfig } from "src/config/user.config";
-import { PermissionService } from "src/module/RBAC/service/permission.service";
-import { UserEntity } from "src/module/user/entities/user.entity";
+import { AuthEnum } from "../../../common/enum/auth.enum";
+import { TPermission, TRoles, TUser } from "../../../common/types/public.type";
+import { userConfig } from "../../../config/user.config";
+import { PermissionService } from "../../../module/RBAC/service/permission.service";
+import { UserEntity } from "../../../module/user/entities/user.entity";
 import { Repository } from "typeorm";
 import { RoleSeeder } from "./role.seeder";
 

@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { TRoles, TUser } from "src/common/types/public.type";
-import { RolesEntity } from "src/module/RBAC/entities/roles.entity";
-import { RolesService } from "src/module/RBAC/service/roles.service";
-import { UserEntity } from "src/module/user/entities/user.entity";
+import { TRoles, TUser } from "../../../common/types/public.type";
+import { RolesEntity } from "../../../module/RBAC/entities/roles.entity";
+import { RolesService } from "../../../module/RBAC/service/roles.service";
+import { UserEntity } from "../../../module/user/entities/user.entity";
 import { Repository } from "typeorm";
 
 @Injectable()

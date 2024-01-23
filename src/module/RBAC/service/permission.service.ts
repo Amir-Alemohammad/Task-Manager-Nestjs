@@ -5,11 +5,11 @@ import { Like, Repository } from "typeorm";
 import { CreatePermissionDto, UpdatePermissionDto } from "../dto/permission.dto";
 import slugify from "slugify";
 import { PermissionMessage } from "../enum/message.enum";
-import { PaginationDto } from "src/common/dtos/pagination.dto";
-import { SortDto } from "src/common/dtos/sortable.dto";
-import { paginationGenerator, paginationSolver } from "src/common/utils/function.util";
+import { PaginationDto } from "../../../common/dtos/pagination.dto";
+import { SortDto } from "../../../common/dtos/sortable.dto";
+import { paginationGenerator, paginationSolver } from "../../../common/utils/function.util";
 import { RolesService } from "./roles.service";
-import { TPermission } from "src/common/types/public.type";
+import { TPermission } from "../../../common/types/public.type";
 
 @Injectable()
 export class PermissionService {

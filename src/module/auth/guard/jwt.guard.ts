@@ -4,16 +4,16 @@ import { Request, Response } from 'express';
 import { AuthService } from '../auth.service';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IUser } from 'src/module/user/interface/user-request.interface';
-import { UserEntity } from 'src/module/user/entities/user.entity';
+import { IUser } from '../../../module/user/interface/user-request.interface';
+import { UserEntity } from '../../../module/user/entities/user.entity';
 import { JwtPayloadDto } from '../dto/payload.dto';
-import { JwtError } from 'src/common/enum/error.enum';
+import { JwtError } from '../../../common/enum/error.enum';
 import { AuthMessages } from '../enum/auth.message';
-import { justSetAuthCookies } from 'src/common/utils/auth-cookie.util';
-import { getUserResponse } from 'src/common/utils/function.util';
-import { GetTokenCookieOption, GetUserCookieData, GetUserCookieOption } from 'src/config/set-cookie.config';
-import { CookieKeys } from 'src/common/enum/cookie.enum';
-import { AccessTokenExpires, RefreshTokenExpires } from 'src/common/constant/expires-data.constant';
+import { justSetAuthCookies } from '../../../common/utils/auth-cookie.util';
+import { getUserResponse } from '../../../common/utils/function.util';
+import { GetTokenCookieOption, GetUserCookieData, GetUserCookieOption } from '../../../config/set-cookie.config';
+import { CookieKeys } from '../../../common/enum/cookie.enum';
+import { AccessTokenExpires, RefreshTokenExpires } from '../../../common/constant/expires-data.constant';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
