@@ -16,8 +16,8 @@ import { checkPermissions } from "../../common/decorators/permission.decorator";
 
 @Controller('user')
 @ApiTags("User")
-// @AuthDecorator()
-// @checkPermissions(Permissions.User)
+@AuthDecorator()
+@checkPermissions(Permissions.User)
 export class UserController {
     constructor(
         private readonly userService: UserService,

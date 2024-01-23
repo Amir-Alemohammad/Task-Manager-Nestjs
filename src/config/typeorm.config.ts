@@ -30,9 +30,9 @@ export const TypeOrmDataSourceConfig: DataSourceOptions = {
     password: DB_PASSWORD,
     database: DB_NAME,
     // synchronize: false,
-    entities: ['dist/**/**/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
+    entities: [UserEntity, TaskEntity, PermissionEntity, RolesEntity],
     // migrationsRun: true,
-    migrations: ['src/migrations/*{.ts,.js}'],
+    // migrations: ['src/migrations/*{.ts,.js}'],
 }
 console.log({ DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT: +DB_PORT, DB_USERNAME });
 export const dataSource = new DataSource(TypeOrmDataSourceConfig);
