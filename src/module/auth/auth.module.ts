@@ -7,12 +7,15 @@ import { UserService } from "../user/user.service";
 import { RolesService } from "../RBAC/service/roles.service";
 import { RolesEntity } from "../RBAC/entities/roles.entity";
 import { PermissionEntity } from "../RBAC/entities/permission.entity";
+import { PermissionService } from "../RBAC/service/permission.service";
+import { PermissionSeeder } from "../seed/data/permission.seeder";
+import { RoleSeeder } from "../seed/data/role.seeder";
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([UserEntity, RolesEntity, PermissionEntity])
     ],
     controllers: [AuthController],
-    providers: [AuthService, UserService, RolesService],
+    providers: [AuthService, UserService, RolesService, PermissionService, PermissionSeeder, RoleSeeder],
 })
 export class AuthModule { }

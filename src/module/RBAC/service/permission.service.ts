@@ -88,4 +88,7 @@ export class PermissionService {
         Object.assign(permission, data);
         await this.permissionRepository.save(permission);
     }
+    async savePermission(permission: TPermission) {
+        return await this.permissionRepository.save(permission);
+    }
 }

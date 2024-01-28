@@ -14,25 +14,34 @@ import { EntityName } from "../../common/enum/entity.enum";
 import { UserMessage } from "./enum/message.enum";
 import { Request } from "express";
 import { RolesService } from "../RBAC/service/roles.service";
+import { TPermission, TRoles } from "src/common/types/public.type";
+import { rolesConfig } from "src/config/roles.config";
+import { permissionConfig } from "src/config/permission.config";
+import { PermissionSeeder } from "../seed/data/permission.seeder";
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
         private readonly rolesService: RolesService,
+        private readonly permissionSeeder: PermissionSeeder,
     ) { }
     async create(createUserDto: RegisterDto) {
         createUserDto = removeEmptyFieldsObject(createUserDto);
         let { username, password } = createUserDto
+        const roleData: TRoles[] = rolesConfig();
+        const permissionData: TPermission[] = permissionConfig();
         await this.checkExistUser(username);
         password = hashSync(password, AuthEnum.SALT_PASS);
         const user = this.userRepository.create({
             username,
             password,
         });
-        if (!user.role) user.role = [];
-        user.role.push(ROLES.USER)
-        return await this.userRepository.save(user)
+        const isEmptyDb = await this.userRepository.findOneBy({});
+        if (!isEmptyDb) {
+            await this.permissionSeeder.seed(user, permissionData, roleData);
+        } else user.role.push(ROLES.USER);
+        await this.userRepository.save(user)
     }
     async checkExistUser(username: string) {
         const user = await this.userRepository.findOneBy({ username })
