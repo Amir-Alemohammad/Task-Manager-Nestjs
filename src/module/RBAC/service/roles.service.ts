@@ -74,7 +74,7 @@ export class RolesService {
         return role
     }
     async saveRole(role: RolesEntity) {
-        await this.rolesRepository.save(role);
+        return await this.rolesRepository.save(role);
     }
     async checkExistByName(name: string) {
         const roles = await this.rolesRepository.findBy({ name });
