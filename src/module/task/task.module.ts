@@ -9,12 +9,15 @@ import { UserService } from "../user/user.service";
 import { RolesEntity } from "../RBAC/entities/roles.entity";
 import { PermissionEntity } from "../RBAC/entities/permission.entity";
 import { RolesService } from "../RBAC/service/roles.service";
+import { PermissionService } from "../RBAC/service/permission.service";
+import { PermissionSeeder } from "../seed/data/permission.seeder";
+import { RoleSeeder } from "../seed/data/role.seeder";
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([TaskEntity, UserEntity, RolesEntity, PermissionEntity])
     ],
     controllers: [TaskController],
-    providers: [TaskService, AuthService, UserService, RolesService]
+    providers: [TaskService, AuthService, UserService, RolesService, PermissionService, PermissionSeeder, RoleSeeder]
 })
 export class TaskModule { }

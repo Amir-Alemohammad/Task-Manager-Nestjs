@@ -35,10 +35,14 @@ export class RoleSeeder {
             const role = await this.rolesService.findRoleByName(dataOfRoles.name);
             if (!role) {
                 const newRole = await this.rolesService.create(dataOfRoles, permissionId)
+                if (!user.role) user.role = []
+                if (!user.roles) user.roles = []
                 user.role.push(newRole.name);
                 user.roles.push(newRole);
             } else {
                 await this.rolesService.assignRole(role, dataOfRoles);
+                if (!user.role) user.role = [];
+                if (!user.roles) user.roles = [];
                 user.role.push(role.name)
                 user.roles.push(role);
             }
