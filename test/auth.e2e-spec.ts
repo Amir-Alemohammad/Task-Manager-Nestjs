@@ -6,7 +6,7 @@ import { AppModule } from "../src/module/app/app.module";
 import * as request from 'supertest';
 import * as cookieParser from 'cookie-parser';
 import { permissionConfig } from "../src/config/permission.config";
-import { rolesConfig } from "../src/config/roles.config";
+import { rolesConfig } from "../src/config/roles.co
 import { getDbConnection } from "../src/common/utils/typeorm-connection.util";
 import { DataSource, QueryRunner } from "typeorm";
 import { RolesEntity } from "src/module/RBAC/entities/roles.entity";
@@ -95,5 +95,4 @@ describe('AuthController (e2e)', () => {
         //             .expect(201);
         //     }
         // })
-    })
 })
